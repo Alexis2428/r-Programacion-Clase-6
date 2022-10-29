@@ -40,23 +40,16 @@ function obtenerEdades() {
     return edades;
 }
 
-function crearBotonResetear() {
-    const botonResetear = document.createElement('button');
-    botonResetear.setAttribute('type', 'button');
-    botonResetear.setAttribute('id', 'resetear');
-    botonResetear.innerText = 'Volver a empezar';
-    return botonResetear;
-}
-function crearBotonCalcular() {
-    const botonCalcular = document.createElement('button');
-    botonCalcular.setAttribute('type', 'button');
-    botonCalcular.setAttribute('id', 'calcular');
-    botonCalcular.innerText = 'Calcular';
-    return botonCalcular;
+function crearBoton(id, texto) {
+    const boton = document.createElement('button');
+    boton.setAttribute('type', 'button');
+    boton.setAttribute('id', id);
+    boton.textContent = texto;
+    return boton;
 }
 function crearInputConLabel(i) {
     const nuevoLabel = document.createElement('label');
-    nuevoLabel.innerText = `Ingrese la edad del integrante ${i+1} `;
+    nuevoLabel.textContent = `Ingrese la edad del integrante ${i+1} `;
     const nuevoInput = document.createElement('input');
     nuevoInput.setAttribute('type', 'number');
     nuevoInput.className = 'edad';
@@ -73,24 +66,24 @@ $botonContinuar.onclick = function() {
     }
     return false;
 }
-document.querySelector('#boton').appendChild(crearBotonCalcular());
+document.querySelector('#boton').appendChild(crearBoton('calcular', 'Calcular'));
 const $botonCalcular = document.querySelector('#calcular');
 $botonCalcular.onclick = function() {
     const edades = obtenerEdades();
-    document.querySelector('#mayor-edad').innerText += obtenerMayorEdad(edades);
-    document.querySelector('#menor-edad').innerText += obtenerMenorEdad(edades);
-    document.querySelector('#promedio').innerText += calcularPromedio(edades);
+    document.querySelector('#mayor-edad').textContent += obtenerMayorEdad(edades);
+    document.querySelector('#menor-edad').textContent += obtenerMenorEdad(edades);
+    document.querySelector('#promedio').textContent += calcularPromedio(edades);
     return false;
 }
-document.querySelector('body').appendChild(crearBotonResetear());
+document.querySelector('body').appendChild(crearBoton('resetear', 'Volver a empezar'));
 const $botonResetear = document.querySelector('#resetear');
 $botonResetear.onclick = function() {
-    document.querySelector('#mayor-edad').innerText = 'La mayor edad del grupo familiar es ...';
-    document.querySelector('#menor-edad').innerText = 'La menor edad del grupo familiar es ...';
-    document.querySelector('#promedio').innerText = 'El promedio de edades del grupo familiar es ...';
+    document.querySelector('#mayor-edad').textContent = 'La mayor edad del grupo familiar es ...';
+    document.querySelector('#menor-edad').textContent = 'La menor edad del grupo familiar es ...';
+    document.querySelector('#promedio').textContent = 'El promedio de edades del grupo familiar es ...';
     const padre = document.querySelector('#campo-integrantes');
     while (padre.lastChild) {
         padre.removeChild(padre.lastChild);
     }
-    return;
+    return false;
 }
