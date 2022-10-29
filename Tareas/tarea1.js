@@ -61,7 +61,6 @@ function crearInputConLabel(i) {
     nuevoInput.setAttribute('type', 'number');
     nuevoInput.className = 'edad';
     const nuevoDiv = document.createElement('div');
-    nuevoDiv.className = 'campoIntegrantes';
     nuevoDiv.appendChild(nuevoLabel);
     nuevoDiv.appendChild(nuevoInput);
     return nuevoDiv;
@@ -89,5 +88,9 @@ $botonResetear.onclick = function() {
     document.querySelector('#mayor-edad').innerText = 'La mayor edad del grupo familiar es ...';
     document.querySelector('#menor-edad').innerText = 'La menor edad del grupo familiar es ...';
     document.querySelector('#promedio').innerText = 'El promedio de edades del grupo familiar es ...';
+    const padre = document.querySelector('#campo-integrantes');
+    while (padre.lastChild) {
+        padre.removeChild(padre.lastChild);
+    }
     return;
 }
