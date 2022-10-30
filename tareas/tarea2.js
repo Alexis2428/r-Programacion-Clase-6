@@ -53,7 +53,7 @@ function crearInputConLabel() {
     const label = document.createElement('label');
     label.textContent = 'Ingrese el salario anual ';
     const input = document.createElement('input');
-    input.setAttribute('type', 'number');
+    input.type = 'number';
     input.className = 'salario-anual';
     const nuevoDiv = document.createElement('div');
     nuevoDiv.appendChild(label);
