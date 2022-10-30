@@ -35,7 +35,9 @@ function obtenerEdades() {
     const listaEdades = document.querySelectorAll('.edad');
     const edades = [];
     listaEdades.forEach(edad => {
-        edades.push(Number(edad.value));
+        if (Number(edad.value) !== 0) {
+            edades.push(Number(edad.value));
+        }
     });
     return edades;
 }
@@ -58,7 +60,14 @@ function crearInputConLabel(i) {
     nuevoDiv.appendChild(nuevoInput);
     return nuevoDiv;
 }
+function iniciarTextoRespuesta() {
+    document.querySelector('#mayor-edad').textContent = 'La mayor edad del grupo familiar es ... ';
+    document.querySelector('#menor-edad').textContent = 'La menor edad del grupo familiar es ... ';
+    document.querySelector('#promedio').textContent = 'El promedio de edades del grupo familiar es ... ';
+    return;
+}
 
+iniciarTextoRespuesta();
 const $botonContinuar = document.querySelector('#continuar');
 $botonContinuar.onclick = function() {
     for (let i = 0; i < Number(document.querySelector('#cantidad-integrantes').value); i++) {
@@ -78,9 +87,7 @@ $botonCalcular.onclick = function() {
 document.querySelector('body').appendChild(crearBoton('resetear', 'Volver a empezar'));
 const $botonResetear = document.querySelector('#resetear');
 $botonResetear.onclick = function() {
-    document.querySelector('#mayor-edad').textContent = 'La mayor edad del grupo familiar es ...';
-    document.querySelector('#menor-edad').textContent = 'La menor edad del grupo familiar es ...';
-    document.querySelector('#promedio').textContent = 'El promedio de edades del grupo familiar es ...';
+    iniciarTextoRespuesta();
     const padre = document.querySelector('#campo-integrantes');
     while (padre.lastChild) {
         padre.removeChild(padre.lastChild);
