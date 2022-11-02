@@ -6,30 +6,22 @@ Punto bonus: Crear un botón para "empezar de nuevo" que empiece el proceso nuev
             borrando los inputs ya creados (investigar cómo en MDN).
 */
 
-function obtenerMayorEdad(edades) {
-    let mayorEdad = edades[0];
-    for (let i = 1; i < edades.length; i++) {
-        if (mayorEdad < edades[i]) {
-            mayorEdad = edades[i];
-        }
-    }
-    return mayorEdad;
 }
-function obtenerMenorEdad(edades) {
-    let menorEdad = edades[0];
-    for (let i = 1; i < edades.length; i++) {
-        if (menorEdad > edades[i]) {
-            menorEdad = edades[i];
-        }
-    }
-    return menorEdad;
+
+const $botonCalcular = document.querySelector('#calcular');
+$botonCalcular.onclick = function(event) {
+    const edades = obtenerEdades();
+    obtenerRespuesta('mayor', obtenerNumeroMayor(edades));
+    obtenerRespuesta('menor', obtenerNumeroMenor(edades));
+    obtenerRespuesta('promedio', obtenerPromedio(edades));
+    mostrarRespuestas();
+    
+    event.preventDefault();
 }
-function calcularPromedio(edades) {
-    let sumaTotal = 0;
-    for (let i = 0; i < edades.length; i++) {
-        sumaTotal += edades[i];
+
     }
-    return (sumaTotal / edades.length).toFixed(2);
+}
+    }
 }
 function obtenerEdades() {
     const listaEdades = document.querySelectorAll('.edad');
@@ -75,14 +67,6 @@ $botonContinuar.onclick = function() {
     }
     return false;
 }
-document.querySelector('#boton').appendChild(crearBoton('calcular', 'Calcular'));
-const $botonCalcular = document.querySelector('#calcular');
-$botonCalcular.onclick = function() {
-    const edades = obtenerEdades();
-    document.querySelector('#mayor-edad').textContent += obtenerMayorEdad(edades);
-    document.querySelector('#menor-edad').textContent += obtenerMenorEdad(edades);
-    document.querySelector('#promedio').textContent += calcularPromedio(edades);
-    return false;
 }
 document.querySelector('body').appendChild(crearBoton('resetear', 'Volver a empezar'));
 const $botonResetear = document.querySelector('#resetear');
