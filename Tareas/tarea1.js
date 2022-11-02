@@ -6,6 +6,12 @@ Punto bonus: Crear un botón para "empezar de nuevo" que empiece el proceso nuev
             borrando los inputs ya creados (investigar cómo en MDN).
 */
 
+const $botonContinuar = document.querySelector('#continuar');
+$botonContinuar.onclick = function(event) {
+    borrarIntegrantesAnteriores();
+    crearIntegrantes();
+
+    event.preventDefault();
 }
 
 const $botonCalcular = document.querySelector('#calcular');
@@ -19,62 +25,75 @@ $botonCalcular.onclick = function(event) {
     event.preventDefault();
 }
 
+const $botonReiniciar = document.querySelector('#reiniciar');
+$botonReiniciar.onclick = function() {
+    borrarIntegrantesAnteriores();
+    ocultarRespuestas();
+    ocultarBotonCalcular();
+}
+
+function borrarIntegrantesAnteriores() {
+    const $integrantes = document.querySelectorAll('.integrante');
+    for (let i = 0; i < $integrantes.length; i++) {
+        $integrantes[i].remove();
     }
 }
+
+function crearIntegrantes() {
+    const cantidadIntegrantes = Number(document.querySelector('#cantidad-integrantes').value);
+
+    if (0 < cantidadIntegrantes) {
+        mostrarBotonCalcular();
     }
+
+    for (let i = 0; i < cantidadIntegrantes; i++) {
+        crearIntegrante(i);
+    };
 }
+
+function crearIntegrante(i) {
+    const $div = document.createElement('div');
+    $div.className = 'integrante';
+
+    const $label = document.createElement('label');
+    $label.textContent = `Ingrese la edad del integrante ${i + 1}`;
+    const $input = document.createElement('input');
+    $input.type = 'number';
+
+    $div.appendChild($label);
+    $div.appendChild($input);
+
+    const $integrantes = document.querySelector('#integrantes');
+    $integrantes.appendChild($div);
+}
+
 function obtenerEdades() {
-    const listaEdades = document.querySelectorAll('.edad');
+    const listaEdades = document.querySelectorAll('.integrante input');
     const edades = [];
-    listaEdades.forEach(edad => {
-        if (Number(edad.value) !== 0) {
-            edades.push(Number(edad.value));
+    for (let i = 0; i < listaEdades.length; i++) {
+        if ('' !== listaEdades[i].value) {
+            edades.push(Number(listaEdades[i].value));
         }
-    });
+    }
     return edades;
 }
 
-function crearBoton(id, texto) {
-    const boton = document.createElement('button');
-    boton.setAttribute('type', 'button');
-    boton.setAttribute('id', id);
-    boton.textContent = texto;
-    return boton;
-}
-function crearInputConLabel(i) {
-    const nuevoLabel = document.createElement('label');
-    nuevoLabel.textContent = `Ingrese la edad del integrante ${i+1} `;
-    const nuevoInput = document.createElement('input');
-    nuevoInput.setAttribute('type', 'number');
-    nuevoInput.className = 'edad';
-    const nuevoDiv = document.createElement('div');
-    nuevoDiv.appendChild(nuevoLabel);
-    nuevoDiv.appendChild(nuevoInput);
-    return nuevoDiv;
-}
-function iniciarTextoRespuesta() {
-    document.querySelector('#mayor-edad').textContent = 'La mayor edad del grupo familiar es ... ';
-    document.querySelector('#menor-edad').textContent = 'La menor edad del grupo familiar es ... ';
-    document.querySelector('#promedio').textContent = 'El promedio de edades del grupo familiar es ... ';
-    return;
+function obtenerRespuesta(tipo, valor) {
+    document.querySelector(`#${tipo}-edad`).textContent = valor;
 }
 
-iniciarTextoRespuesta();
-const $botonContinuar = document.querySelector('#continuar');
-$botonContinuar.onclick = function() {
-    for (let i = 0; i < Number(document.querySelector('#cantidad-integrantes').value); i++) {
-        document.querySelector('div').appendChild(crearInputConLabel(i));
-    }
-    return false;
+function mostrarBotonCalcular() {
+    document.querySelector('#calcular').className = '';
 }
+
+function ocultarBotonCalcular() {
+    document.querySelector('#calcular').className = 'oculto';
 }
-document.querySelector('body').appendChild(crearBoton('resetear', 'Volver a empezar'));
-const $botonResetear = document.querySelector('#resetear');
-$botonResetear.onclick = function() {
-    iniciarTextoRespuesta();
-    const padre = document.querySelector('#campo-integrantes');
-    while (padre.lastChild) {
-        padre.removeChild(padre.lastChild);
-    }
-    return false;
+
+function mostrarRespuestas() {
+    document.querySelector('#respuestas').className = '';
+}
+
+function ocultarRespuestas() {
+    document.querySelector('#respuestas').className = 'oculto';
 }
