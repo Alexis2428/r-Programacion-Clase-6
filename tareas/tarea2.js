@@ -6,55 +6,103 @@ salario anual promedio y salario mensual promedio.
 Punto bonus: si hay inputs vacíos, ignorarlos en el cálculo (no contarlos como 0).
 */
 
+const $botonAgregar = document.querySelector('#agregar');
+$botonAgregar.onclick = function() {
+    agregarIntegrante();
+    mostrarBotonCalcular();
 }
+
+const $botonQuitar = document.querySelector('#quitar');
+$botonQuitar.onclick = borrarUltimoIntegrante;
+
+const $botonCalcular = document.querySelector('#calcular');
+$botonCalcular.onclick = function(event) {
+    const salarios = obtenerSalarios();
+    obtenerRespuesta('mayor', obtenerNumeroMayor(salarios));
+    obtenerRespuesta('menor', obtenerNumeroMenor(salarios));
+    obtenerRespuesta('promedio', obtenerPromedio(salarios));
+    obtenerRespuesta('mensual-promedio', (obtenerPromedio(salarios) / 12).toFixed(2));
+
+    mostrarRespuestas();
+    mostrarBotonReiniciar();
+
+    event.preventDefault();
+}
+
+const $botonReiniciar = document.querySelector('#reiniciar');
+$botonReiniciar.onclick = function() {
+    borrarIntegrantes();
+    ocultarBotonCalcular();
+    ocultarRespuestas();
+    ocultarBotonReiniciar();
+}
+
+
+function agregarIntegrante() {
+    const $label = document.createElement('label');
+    $label.textContent = 'Ingrese el salario anual ';
+    const $input = document.createElement('input');
+    $input.type = 'number';
+
+    const $div = document.createElement('div');
+    $div.className = 'integrante';
+
+    $div.appendChild($label);
+    $div.appendChild($input);
+
+    document.querySelector('#integrantes').appendChild($div);
+}
+
+function borrarUltimoIntegrante() {
+    const $integrantes = document.querySelectorAll('.integrante');
+    if (0 < $integrantes.length) {
+        const ultimoIntegrante = $integrantes.length - 1;
+        $integrantes[ultimoIntegrante].remove();
     }
 }
+
+function borrarIntegrantes() {
+    const $integrantes = document.querySelectorAll('.integrante');
+    for (let i = $integrantes.length; i > 0; i--) {
+        borrarUltimoIntegrante();
     }
 }
+
 function obtenerSalarios() {
+    const $listaSalarios = document.querySelectorAll('.integrante input');
     const salarios = [];
-    const listaSalarios = document.querySelectorAll('.salario-anual');
-    listaSalarios.forEach(salario => {
-        if (Number(salario.value) !== 0) {
-            salarios.push(Number(salario.value));
+    for (let i = 0; i < $listaSalarios.length; i++) {
+        if ('' !== $listaSalarios[i].value) {
+            salarios.push(Number($listaSalarios[i].value));
         }
-    });
+    }
     return salarios;
 }
 
-function iniciarTextoRespuesta() {
-    document.querySelector('#mayor-salario').textContent = 'El mayor salario anual es ... ';
-    document.querySelector('#menor-salario').textContent = 'El menor salario anual es ... ';
-    document.querySelector('#salario-anual-promedio').textContent = 'El salario anual promedio es ... ';
-    document.querySelector('#salario-mensual-promedio').textContent = 'El salario mensual promedio es ... ';
-    return;
-}
-function crearInputConLabel() {
-    const label = document.createElement('label');
-    label.textContent = 'Ingrese el salario anual ';
-    const input = document.createElement('input');
-    input.type = 'number';
-    input.className = 'salario-anual';
-    const nuevoDiv = document.createElement('div');
-    nuevoDiv.appendChild(label);
-    nuevoDiv.appendChild(input);
-    return nuevoDiv;
+function obtenerRespuesta(tipo, valor) {
+    document.querySelector(`#salario-${tipo}`).textContent = valor;
 }
 
-const $botonAgregar = document.querySelector('#agregar');
-const $botonQuitar = document.querySelector('#quitar');
-const $nodoPadre = document.querySelector('#formulario-datos');
-iniciarTextoRespuesta();
-$botonAgregar.onclick = function() {
-    $nodoPadre.appendChild(crearInputConLabel());
-    return false;
+function mostrarBotonCalcular() {
+    document.querySelector('#calcular').className = '';
 }
-$botonQuitar.onclick = function() {
-    $nodoPadre.removeChild($nodoPadre.lastChild);
-    return false;
+
+function ocultarBotonCalcular() {
+    document.querySelector('#calcular').className = 'oculto';
 }
+
+function mostrarRespuestas() {
+    document.querySelector('#respuestas').className = '';
 }
-const $botonLimpiar = document.querySelector('#limpiar');
-$botonLimpiar.onclick = function() {
-    iniciarTextoRespuesta();
+
+function ocultarRespuestas() {
+    document.querySelector('#respuestas').className = 'oculto';
+}
+
+function mostrarBotonReiniciar() {
+    document.querySelector('#reiniciar').className = '';
+}
+
+function ocultarBotonReiniciar() {
+    document.querySelector('#reiniciar').className = 'oculto';
 }
