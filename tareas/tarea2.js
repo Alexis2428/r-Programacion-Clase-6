@@ -6,30 +6,10 @@ salario anual promedio y salario mensual promedio.
 Punto bonus: si hay inputs vacíos, ignorarlos en el cálculo (no contarlos como 0).
 */
 
-function calcularSalarioAnualPromedio(salarios) {
-    let sumaTotal = 0;
-    for (let i = 0; i < salarios.length; i++) {
-        sumaTotal += salarios[i];
-    }
-    return (sumaTotal / salarios.length).toFixed(2);
 }
-function obtenerMenorSalario(salarios) {
-    let menorSalario = salarios[0];
-    for (let i = 1; i < salarios.length; i++) {
-        if (salarios[i] < menorSalario) {
-            menorSalario = salarios[i];
-        }
     }
-    return menorSalario;
 }
-function obtenerMayorSalario(salarios) {
-    let mayorSalario = salarios[0];
-    for (let i = 1; i < salarios.length; i++) {
-        if (salarios[i] > mayorSalario) {
-            mayorSalario = salarios[i];
-        }
     }
-    return mayorSalario;
 }
 function obtenerSalarios() {
     const salarios = [];
@@ -73,14 +53,6 @@ $botonQuitar.onclick = function() {
     $nodoPadre.removeChild($nodoPadre.lastChild);
     return false;
 }
-const $botonCalcular = document.querySelector('#calcular');
-$botonCalcular.onclick = function() {
-    const salarios = obtenerSalarios();
-    document.querySelector('#mayor-salario').textContent += obtenerMayorSalario(salarios);
-    document.querySelector('#menor-salario').textContent += obtenerMenorSalario(salarios);
-    document.querySelector('#salario-anual-promedio').textContent += calcularSalarioAnualPromedio(salarios);
-    document.querySelector('#salario-mensual-promedio').textContent += (calcularSalarioAnualPromedio(salarios) / 12).toFixed(2);
-    return false;
 }
 const $botonLimpiar = document.querySelector('#limpiar');
 $botonLimpiar.onclick = function() {
