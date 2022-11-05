@@ -8,21 +8,21 @@ Punto bonus: Crear un botón para "empezar de nuevo" que empiece el proceso nuev
 
 const $botonContinuar = document.querySelector('#continuar');
 $botonContinuar.onclick = function(event) {
+    event.preventDefault();
+
     borrarIntegrantesAnteriores();
     crearIntegrantes();
-
-    event.preventDefault();
 }
 
 const $botonCalcular = document.querySelector('#calcular');
 $botonCalcular.onclick = function(event) {
+    event.preventDefault();
+
     const edades = obtenerEdades();
     obtenerRespuesta('mayor', obtenerNumeroMayor(edades));
     obtenerRespuesta('menor', obtenerNumeroMenor(edades));
-    obtenerRespuesta('promedio', obtenerPromedio(edades));
+    obtenerRespuesta('promedio', obtenerPromedio(edades).toFixed(2));
     mostrarRespuestas();
-    
-    event.preventDefault();
 }
 
 const $botonReiniciar = document.querySelector('#reiniciar');
@@ -51,20 +51,20 @@ function crearIntegrantes() {
     };
 }
 
-function crearIntegrante(i) {
-    const $div = document.createElement('div');
-    $div.className = 'integrante';
+function crearIntegrante(indice) {
+    const $integrante = document.createElement('div');
+    $integrante.className = 'integrante';
 
-    const $label = document.createElement('label');
-    $label.textContent = `Ingrese la edad del integrante ${i + 1}`;
-    const $input = document.createElement('input');
-    $input.type = 'number';
+    const $texto = document.createElement('label');
+    $texto.textContent = `Ingrese la edad del integrante ${indice + 1}`;
+    const $cuadroTexto = document.createElement('input');
+    $cuadroTexto.type = 'number';
 
-    $div.appendChild($label);
-    $div.appendChild($input);
+    $integrante.appendChild($texto);
+    $integrante.appendChild($cuadroTexto);
 
     const $integrantes = document.querySelector('#integrantes');
-    $integrantes.appendChild($div);
+    $integrantes.appendChild($integrante);
 }
 
 function obtenerEdades() {
