@@ -17,16 +17,16 @@ $botonQuitar.onclick = borrarUltimoIntegrante;
 
 const $botonCalcular = document.querySelector('#calcular');
 $botonCalcular.onclick = function(event) {
+    event.preventDefault();
+
     const salarios = obtenerSalarios();
     obtenerRespuesta('mayor', obtenerNumeroMayor(salarios));
     obtenerRespuesta('menor', obtenerNumeroMenor(salarios));
-    obtenerRespuesta('promedio', obtenerPromedio(salarios));
+    obtenerRespuesta('promedio', obtenerPromedio(salarios).toFixed(2));
     obtenerRespuesta('mensual-promedio', (obtenerPromedio(salarios) / 12).toFixed(2));
 
     mostrarRespuestas();
     mostrarBotonReiniciar();
-
-    event.preventDefault();
 }
 
 const $botonReiniciar = document.querySelector('#reiniciar');
@@ -39,18 +39,18 @@ $botonReiniciar.onclick = function() {
 
 
 function agregarIntegrante() {
-    const $label = document.createElement('label');
-    $label.textContent = 'Ingrese el salario anual ';
-    const $input = document.createElement('input');
-    $input.type = 'number';
+    const $texto = document.createElement('label');
+    $texto.textContent = 'Ingrese el salario anual ';
+    const $cuadroTexto = document.createElement('input');
+    $cuadroTexto.type = 'number';
 
-    const $div = document.createElement('div');
-    $div.className = 'integrante';
+    const $integrante = document.createElement('div');
+    $integrante.className = 'integrante';
 
-    $div.appendChild($label);
-    $div.appendChild($input);
+    $integrante.appendChild($texto);
+    $integrante.appendChild($cuadroTexto);
 
-    document.querySelector('#integrantes').appendChild($div);
+    document.querySelector('#integrantes').appendChild($integrante);
 }
 
 function borrarUltimoIntegrante() {
