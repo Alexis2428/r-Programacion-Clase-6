@@ -106,3 +106,11 @@ function mostrarBotonReiniciar() {
 function ocultarBotonReiniciar() {
     document.querySelector('#reiniciar').className = 'oculto';
 }
+
+function validarSalarios(salarios) {
+    if (0 === salarios.length) {
+        return 'Debe ingresar un salario para operar';
+    }
+    
+    return '';
+}
