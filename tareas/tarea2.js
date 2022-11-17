@@ -20,13 +20,18 @@ $botonCalcular.onclick = function(event) {
     event.preventDefault();
 
     const salarios = obtenerSalarios();
-    obtenerRespuesta('mayor', obtenerNumeroMayor(salarios));
-    obtenerRespuesta('menor', obtenerNumeroMenor(salarios));
-    obtenerRespuesta('promedio', obtenerPromedio(salarios).toFixed(2));
-    obtenerRespuesta('mensual-promedio', (obtenerPromedio(salarios) / 12).toFixed(2));
 
-    mostrarRespuestas();
-    mostrarBotonReiniciar();
+    if ('' === validarSalarios(salarios)) {
+        obtenerRespuesta('mayor', obtenerNumeroMayor(salarios));
+        obtenerRespuesta('menor', obtenerNumeroMenor(salarios));
+        obtenerRespuesta('promedio', obtenerPromedio(salarios).toFixed(2));
+        obtenerRespuesta('mensual-promedio', (obtenerPromedio(salarios) / 12).toFixed(2));
+
+        mostrarRespuestas();
+        mostrarBotonReiniciar();
+    } else {
+        alert(validarSalarios(salarios));
+    }
 }
 
 const $botonReiniciar = document.querySelector('#reiniciar');
