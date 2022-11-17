@@ -19,10 +19,15 @@ $botonCalcular.onclick = function(event) {
     event.preventDefault();
 
     const edades = obtenerEdades();
-    obtenerRespuesta('mayor', obtenerNumeroMayor(edades));
-    obtenerRespuesta('menor', obtenerNumeroMenor(edades));
-    obtenerRespuesta('promedio', obtenerPromedio(edades).toFixed(2));
-    mostrarRespuestas();
+
+    if ('' === validarEdades(edades)) {
+        obtenerRespuesta('mayor', obtenerNumeroMayor(edades));
+        obtenerRespuesta('menor', obtenerNumeroMenor(edades));
+        obtenerRespuesta('promedio', obtenerPromedio(edades).toFixed(2));
+        mostrarRespuestas();
+    } else {
+        alert(validarEdades(edades));
+    }
 }
 
 const $botonReiniciar = document.querySelector('#reiniciar');
