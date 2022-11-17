@@ -97,3 +97,11 @@ function mostrarRespuestas() {
 function ocultarRespuestas() {
     document.querySelector('#respuestas').className = 'oculto';
 }
+
+function validarEdades (edades) {
+    if (0 === edades.length) {
+        return 'Debe ingresar una edad antes de operar';
+    }
+
+    return '';
+}
