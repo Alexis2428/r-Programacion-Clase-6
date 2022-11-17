@@ -7,7 +7,7 @@ Punto bonus: Crear un botón para "empezar de nuevo" que empiece el proceso nuev
 */
 
 const $botonContinuar = document.querySelector('#continuar');
-$botonContinuar.onclick = function(event) {
+$botonContinuar.onclick = function (event) {
     event.preventDefault();
 
     borrarIntegrantesAnteriores();
@@ -15,7 +15,7 @@ $botonContinuar.onclick = function(event) {
 }
 
 const $botonCalcular = document.querySelector('#calcular');
-$botonCalcular.onclick = function(event) {
+$botonCalcular.onclick = function (event) {
     event.preventDefault();
 
     const edades = obtenerEdades();
@@ -31,7 +31,7 @@ $botonCalcular.onclick = function(event) {
 }
 
 const $botonReiniciar = document.querySelector('#reiniciar');
-$botonReiniciar.onclick = function() {
+$botonReiniciar.onclick = function () {
     borrarIntegrantesAnteriores();
     ocultarRespuestas();
     ocultarBotonCalcular();
@@ -103,7 +103,7 @@ function ocultarRespuestas() {
     document.querySelector('#respuestas').className = 'oculto';
 }
 
-function validarEdades (edades) {
+function validarEdades(edades) {
     if (0 === edades.length) {
         return 'Debe ingresar una edad antes de operar';
     }
