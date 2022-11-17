@@ -7,7 +7,7 @@ Punto bonus: si hay inputs vacíos, ignorarlos en el cálculo (no contarlos como
 */
 
 const $botonAgregar = document.querySelector('#agregar');
-$botonAgregar.onclick = function() {
+$botonAgregar.onclick = function () {
     agregarIntegrante();
     mostrarBotonCalcular();
 }
@@ -16,7 +16,7 @@ const $botonQuitar = document.querySelector('#quitar');
 $botonQuitar.onclick = borrarUltimoIntegrante;
 
 const $botonCalcular = document.querySelector('#calcular');
-$botonCalcular.onclick = function(event) {
+$botonCalcular.onclick = function (event) {
     event.preventDefault();
 
     const salarios = obtenerSalarios();
@@ -35,7 +35,7 @@ $botonCalcular.onclick = function(event) {
 }
 
 const $botonReiniciar = document.querySelector('#reiniciar');
-$botonReiniciar.onclick = function() {
+$botonReiniciar.onclick = function () {
     borrarIntegrantes();
     ocultarBotonCalcular();
     ocultarRespuestas();
