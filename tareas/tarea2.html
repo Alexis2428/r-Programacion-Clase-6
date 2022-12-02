@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css" />
+    <title>Clase 6</title>
+</head>
+<body>
+    <form name="calculador-salario">
+        <h4>Presione los botones agregar y quitar para ingresar el salario anual de cada integrante del grupo familiar que trabaje</h4>
+        
+        <div id="integrantes"></div>
+
+        <button type="button" id="agregar">Agregar</button>
+        <button type="button" id="quitar">Quitar</button>
+
+        <button type="submit" id="calcular" class="oculto">Calcular</button>
+
+        <div id="respuestas" class="oculto">
+            <p>El mayor salario anual es ... <strong id="salario-mayor"></strong></p>
+            <p>El menor salario anual es ... <strong id="salario-menor"></strong></p>
+            <p>El salario anual promedio es ... <strong id="salario-promedio"></strong></p>
+            <p>El salario mensual promedio es ... <strong id="salario-mensual-promedio"></strong></p>
+        </div>
+
+        <button type="reset" id="reiniciar" class="oculto">Reiniciar</button>
+    </form>
+    <script type="text/javascript" src="calculos.js"></script>
+    <script type="text/javascript" src="tarea2.js"></script>
+    <script type="text/javascript" src="pruebas.js"></Script>
+</body>
+</html>
